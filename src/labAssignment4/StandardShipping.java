@@ -20,6 +20,6 @@ public class StandardShipping implements ShippingCalculator {
     @Override
     public double calculate(Sofa sofa) {
         // Sofas are bulky; cost is based on distance (e.g., 50.0 per km)
-        return sofa.getDistanceInKm() * 50.0;
+        return sofa.getDistance() * 50.0;
     }
 }

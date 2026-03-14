@@ -1,13 +1,13 @@
 package labAssignment4;
 
 public class Sofa implements Furniture {
-    private double distanceInKm;
+    private double distance;
 
-    public Sofa(double distanceInKm) {
-        this.distanceInKm = distanceInKm;
+    public Sofa(double distance) {
+        this.distance = distance;
     }
 
-    public double getDistanceInKm() { return distanceInKm; }
+    public double getDistance() { return distance; }
 
     @Override
     public double accept(ShippingCalculator visitor) {
