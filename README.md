@@ -4,43 +4,45 @@
 This is a requirement for Lab Assignment 4 in Software Engineering 2.
 
 ## Background
-You are a software developer working on an e-commerce platform that sells various types of furniture (chairs, tables, sofas, etc.). Each furniture type may have unique shipping cost calculations, and implementing shipping logic directly in each furniture class causes tight coupling and maintenance issues.
+You are a software developer working on an e-commerce platform that sells various types of furniture (chairs, tables, sofas, etc.). Each furniture type has unique shipping cost calculations, and implementing shipping logic directly inside each furniture class causes tight coupling and maintenance issues.
 
 ## Objective
-Implement a visitor design pattern approach to calculate shipping costs for different furniture types based on category and size. The system should keep furniture classes separate from shipping logic and use visitor elements to compute shipping charges.
+Implement a visitor design pattern approach to calculate shipping costs for different furniture types based on their category-specific attributes. The system should keep furniture classes separate from shipping logic and use visitor elements to compute shipping charges.
 
 ## Requirements
 
-### Waste Container
-Create a class to represent waste containers, each with a specific capacity and type of waste (e.g., organic, recyclable, hazardous, electronic).
+### Furniture Items
+Create classes to represent furniture items, each with category-specific attributes:
+- `Chair` — defined by material (e.g., Wood, Plastic)
+- `Table` — defined by weight (in kg)
+- `Sofa` — defined by shipping distance (in km)
 
-### Waste Collection Chain
-Implement a chain of responsibility pattern to handle different types of waste containers. Each handler in the chain should be responsible for collecting and disposing of a specific type of waste.
+### Shipping Calculator Visitor
+Implement the visitor pattern to handle shipping cost calculations for each furniture type. Each visitor should define a `calculate()` method for every concrete furniture class.
 
-### Waste Collection Process
-- The system should initialize a chain of waste collectors, each responsible for a different type of waste.
-- When a waste container is full or needs disposal, the system should trigger the waste collection process.
-- The appropriate waste collector in the chain should handle the disposal based on the type and capacity of the waste container.
+### Shipping Calculation Process
+- The system should initialize a list of furniture items representing a shopping cart.
+- When shipping costs need to be computed, the system should trigger the visitor's calculation logic.
+- The appropriate `calculate()` method should be called based on the concrete type of each furniture item.
 
 ### Validation
-Ensure that waste containers are correctly identified and disposed of by the appropriate waste collector in the chain.
+Ensure that each furniture type is correctly handled by the visitor and that shipping costs are computed according to the item's specific attributes.
 
 ## Execution Flow
-- Create waste container objects with their specifications (type and capacity)
-- Create waste collector objects in a chain for different waste types
-- Process waste containers through the chain
-- Collectors examine waste data and perform disposal operations
-- Display results dynamically
+- Create furniture objects with their specifications (material, weight, or distance)
+- Create a `StandardShipping` visitor instance
+- Pass each furniture item through the visitor via `accept()`
+- The visitor examines each item's data and computes its shipping cost
+- Display the per-item breakdown and total shipping cost
 
-## Benefits of Chain of Responsibility Pattern
-✅ **Separation of Concerns**: Waste container objects don't need to know about disposal logic  
-✅ **Easy to Extend**: Add new waste types without modifying existing collector classes  
-✅ **Flexible Processing**: Requests can be handled by any collector in the chain  
-✅ **Single Responsibility**: Each collector handles one specific type of waste  
+## Benefits of Visitor Pattern
+✅ **Separation of Concerns**: Furniture classes don't need to contain any shipping logic  
+✅ **Easy to Extend**: Add new shipping strategies without modifying existing furniture classes  
+✅ **Flexible Processing**: Different visitors can define different pricing algorithms  
+✅ **Single Responsibility**: Each visitor handles one specific shipping strategy  
 
 ## How to Run
 Compile and run the main class:
-
 ```
 javac src/labAssignment4/*.java
 java -cp src labAssignment4.ECommerceApp
